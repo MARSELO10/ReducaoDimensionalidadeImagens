@@ -1,0 +1,107 @@
+"""
+Projeto: Redução de Dimensionalidade em Imagens para Redes Neurais | Project: Dimensionality Reduction in Images for Neural Networks
+Developed by: Marcelo José Vieira Filho
+Date: 08/2025
+"""
+
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+import tkinter as tk
+from tkinter import filedialog
+
+def load_image():
+    print("=" * 100)
+    print("Projeto: Redução de Dimensionalidade em Imagens para Redes Neurais | Project: Dimensionality Reduction in Images for Neural Networks")
+    print("Developed by: Marcelo José Vieira Filho - 08/2025 - Dio.me")
+    print("=" * 100)
+    print("[INFO] Selecione uma imagem... | [INFO] Select an image...")
+
+    root = tk.Tk()
+    root.withdraw()  # Esconde a janela principal
+    file_path = filedialog.askopenfilename(
+        title="Selecione uma imagem",
+        filetypes=[("Arquivos de Imagem", "*.jpg *.jpeg *.png *.bmp *.tiff")]
+    )
+    return file_path
+
+def read_image(path):
+    img_bgr = cv2.imread(path)  # OpenCV lê em BGR
+    img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)  # converte para RGB
+    return img_rgb
+
+def convert_to_gray(img_rgb):
+    height, width, _ = img_rgb.shape
+    img_gray = np.zeros((height, width), dtype=np.uint8)
+    w_r, w_g, w_b = 0.299, 0.587, 0.114
+
+    for i in range(height):
+        for j in range(width):
+            r, g, b = img_rgb[i][j]
+            gray = int(w_r * r + w_g * g + w_b * b)
+            img_gray[i][j] = np.clip(gray, 0, 255)
+    return img_gray
+
+def binarize(img_gray):
+    threshold = int(np.mean(img_gray))
+    print(f"[INFO] Threshold para binarização: {threshold} | [INFO] Threshold for binarization: {threshold}")
+    img_bin = np.where(img_gray >= threshold, 255, 0).astype(np.uint8)
+    return img_bin
+
+def display_and_save(original, gray, binary):
+    fig, axs = plt.subplots(2, 3, figsize=(24, 12))
+
+    axs[0][0].imshow(original)
+    axs[0][0].set_title("Figura 1: Original | Figure 1: Original")
+    axs[0][0].axis('off')
+
+    axs[0][1].imshow(gray, cmap='gray')
+    axs[0][1].set_title("Figura 2: Níveis de Cinza | Figure 2: Grayscale")
+    axs[0][1].axis('off')
+
+    axs[0][2].imshow(binary, cmap='gray')
+    axs[0][2].set_title("Figura 3: Preto e Branco | Figure 3: Black and White")
+    axs[0][2].axis('off')
+
+    description_pt = (
+        "Descrição (PT)\n"
+        "A imagem original foi carregada com canais RGB.\n"
+        "A segunda imagem representa a transformação para tons de cinza, realizada com base em pesos lineares perceptuais.\n"
+        "A terceira imagem foi binarizada utilizando o valor médio dos pixels como limiar."
+    )
+
+    description_en = (
+        "Description (EN):\n"
+        "The original image was loaded with RGB channels.\n"
+        "The second image represents the grayscale transformation, performed using perceptual linear weights.\n"
+        "The third image was binarized using the average pixel value as the threshold."
+    )
+
+    full_description = description_pt + "\n\n" + description_en
+
+    axs[1][0].text(0.0, 0.5, full_description, ha='left', va='center', fontsize=20, wrap=True)
+    axs[1][0].axis('off')
+    axs[1][1].axis('off')
+    axs[1][2].axis('off')
+
+    fig.suptitle("Projeto: Redução de Dimensionalidade em Imagens para Redes Neurais | Project: Dimensionality Reduction in Images for Neural Networks", fontsize=15)
+    fig.text(0.5, 0.04, "Dio.me - project developed by Marcelo José Vieira Filho - 08/2025", ha='center', fontsize=14)
+
+    plt.tight_layout(rect=[0, 0.08, 1, 0.94])
+    plt.subplots_adjust(wspace=0.1, hspace=0.1)
+
+    plt.show()
+
+    # salvando localmente
+    fig.savefig("resultado.png", dpi=100)
+    print("[SUCESSO] Imagem combinada salva como 'resultado.png' | [SUCCESS] Combined image saved as 'resultado.png'")
+
+if __name__ == "__main__":
+    path = load_image()
+    if not path:
+        print("[ERRO] Nenhuma imagem selecionada. | [ERROR] No image selected.")
+    else:
+        img_rgb = read_image(path)
+        img_gray = convert_to_gray(img_rgb)
+        img_binary = binarize(img_gray)
+        display_and_save(img_rgb, img_gray, img_binary)
