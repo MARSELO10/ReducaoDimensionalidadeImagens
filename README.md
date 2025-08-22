@@ -104,11 +104,11 @@ pip install numpy matplotlib
 
 ```text
 projeto-imagempb.py
-├── carregar_imagem()          # Interface de seleção
-├── ler_imagem()               # Carregamento e normalização
-├── converter_para_cinza()     # Conversão RGB → Grayscale
-├── binarizar()                # Threshold adaptativo
-└── exibir_e_salvar()          # Visualização e exportação
+├── load_image()          # Interface de seleção
+├── read_image()          # Carregamento e normalização
+├── convert_to_gray()     # Conversão RGB → Grayscale
+├── binarize()            # Threshold adaptativo
+└── display_and_save()    # Visualização e exportação
 ```
 
 ---
