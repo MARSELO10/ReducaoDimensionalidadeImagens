@@ -139,13 +139,11 @@ Estes são os *links* das empresas que estão de alguma forma ligadas a este pro
 - [Visual Studio Code](https://code.visualstudio.com/): É um editor de código-fonte gratuito e poderoso, desenvolvido pela Microsoft, que é leve, mas altamente personalizável, e está disponível para Windows, macOS e Linux. Ele suporta nativamente linguagens como JavaScript, TypeScript e Node.js, e possui um vasto ecossistema de extensões para outras linguagens e tecnologias, tornando-se uma ferramenta versátil para desenvolvedores. 
 - [Lenna]: É uma imagem de teste padrão amplamente utilizada no campo de processamento de imagens desde 1973. É uma foto da modelo sueca Lena Forsén, tirada pelo fotógrafo Dwight Hooker, cortada da página central da edição de novembro de 1972 da revista Playboy.
 
-### Dashboard da tabela, já com os dados tratados, segmentados e legíveis
-
 # Contribuição
 
 Contribuições são bem-vindas!\
 Se você encontrar algum problema ou tiver sugestões de melhorias, por favor abra uma **issue** ou envie um **pull request** para o repositório.\
-Ao contribuir para este projeto, siga o layout existente na tabela, as convenções de commits e envie suas alterações em um **branch** ou **file** separado.\
+Ao contribuir para este projeto, siga as convenções de commits e envie suas alterações em um **branch** ou **file** separado.\
 Saiba mais sobre o código de conduta acessando o link: [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
 # Licença
