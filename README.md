@@ -45,7 +45,7 @@ Imagem Lena - foi o nome atribuído a uma imagem amplamente utilizada no campo d
 ## 📦 Instrução de Instalação e dependências
 
 ```bash
-python --version  # Requer Python 3.7+ se não estiver no Collab
+python --version  # Requer Python 3.12.6 se não estiver no Collab
 ```
 
 ```bash
